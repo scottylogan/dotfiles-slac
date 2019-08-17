@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnyConnectPreferences>
+<DefaultUser>swl</DefaultUser>
+<DefaultSecondUser></DefaultSecondUser>
+<ClientCertificateThumbprint>4881E863CCF41D9269337431CBD72ACEF8AFAEF1</ClientCertificateThumbprint>
+<MultipleClientCertificateThumbprints></MultipleClientCertificateThumbprints>
+<ServerCertificateThumbprint></ServerCertificateThumbprint>
+<DefaultHostName>CardinalKey-VPN</DefaultHostName>
+<DefaultHostAddress></DefaultHostAddress>
+<DefaultGroup>CardinalKey-VPN</DefaultGroup>
+<ProxyHost></ProxyHost>
+<ProxyPort></ProxyPort>
+<SDITokenType>none</SDITokenType>
+<ControllablePreferences>
+<BlockUntrustedServers>false</BlockUntrustedServers>
+<MinimizeOnConnect>false</MinimizeOnConnect>
+<AutoConnectOnStart>false</AutoConnectOnStart>
+<DisableCaptivePortalDetection>true</DisableCaptivePortalDetection></ControllablePreferences>
+</AnyConnectPreferences>

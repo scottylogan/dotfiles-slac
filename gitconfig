@@ -1,0 +1,28 @@
+[user]
+	name = Scotty Logan
+	email = swl@stanford.edu
+	signingkey = 312718A0
+
+[core]
+	editor = emacsclient -n
+	excludesfile = ~/.gitignore_global
+
+[push]
+	default = simple
+
+[credential]
+
+[hub]
+
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+
+[color]
+	ui = true
+
+[gpg]
+	program = gpg
+
+[tag]
+	sort = version:refname

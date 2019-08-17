@@ -1,0 +1,5 @@
+export MAIL=swl@stanford.edu
+export AWS_DEFAULT_PROFILE=itlab
+export GIT_AUTHOR_EMAIL=${MAIL}
+export GIT_COMMITTER_EMAIL=${GIT_AUTHOR_EMAIL}
+

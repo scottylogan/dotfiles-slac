@@ -1,0 +1,32 @@
+# .bashrc.local (Stanford)
+
+if tty -s; then
+
+### INTERACTIVE SHELL ###
+
+  ### ALIASES ###
+
+  alias rkinit='kinit -c FILE:/tmp/swl.root --no-change-default --no-proxiable --no-forwardable swl/root'
+
+  function deb-s3 () {
+    /usr/local/bin/deb-s3 $* --s3-region us-west-2 -b repo.itlab.stanford.edu
+  }
+
+  ## SSH AGENT ###
+  # ssh-add -l returns:
+  #   0 if the agent can be contacted and has keys
+  #   1 if the agent can be contacted but has no keys
+  #   2 if the agent cannot be contacted
+  #
+  # Only add keys if the agent is running
+  # (should prevent prompting to add keys when ssh'ing
+  #  in to this system)
+  ssh-add -l >/dev/null 2>&1
+  if [ $? -eq 1 -a ${TTY} = "/dev/ttys000" ]; then
+    ssh-add $HOME/.ssh/yubikey >/dev/null
+    ssh-add $HOME/.ssh/github_rsa >/dev/null
+    ssh-add $HOME/.ssh/itlab-aws >/dev/null
+    ssh-add $HOME/.ssh/coreoscluster01.pem >/dev/null
+  fi
+
+fi
