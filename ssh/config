@@ -19,7 +19,7 @@ Host webapp.itlab.stanford.edu
   IdentityFile ~/.ssh/id_dsa
   ForwardAgent yes
 
-Host *.itlab.stanford.edu 
+Host *.itlab.stanford.edu !ermine.itlab.stanford.edu !sable.itlab.stanford.edu
   IdentityFile ~/.ssh/itlab-aws
   User admin
   GSSAPIAuthentication no
@@ -44,7 +44,7 @@ Host *.anchorage.stanford.edu
 Host git.stanford.edu
    User gitolite
 
-Host ermine.stanford.edu sable.stanford.edu mineral.stanford.edu vegetable.stanford.edu cpauth.stanford.edu who.stanford.edu
+Host ermine.stanford.edu ermine.itlab.stanford.edu sable.stanford.edu sable.itlab.stanford.edu mineral.stanford.edu vegetable.stanford.edu cpauth.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication no
   GSSAPIDelegateCredentials no
