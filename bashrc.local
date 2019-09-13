@@ -1,6 +1,6 @@
 # .bashrc.local (Stanford)
 
-if tty -s; then
+if [[ $- == *i* ]]; then
 
 ### INTERACTIVE SHELL ###
 
