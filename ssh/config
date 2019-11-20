@@ -2,7 +2,7 @@
 
 Host bastion.*.stanford.edu
   User swl
-  IdentityFile ~/.ssh/id_dsa
+  IdentityFile ~/.ssh/id_rsa
   ForwardAgent yes
 #  PubkeyAuthentication no
 #  GSSAPIAuthentication yes
@@ -16,7 +16,7 @@ Host code.stanford.edu
 
 Host webapp.itlab.stanford.edu
   User swl
-  IdentityFile ~/.ssh/id_dsa
+  IdentityFile ~/.ssh/id_rsa
   ForwardAgent yes
 
 Host *.itlab.stanford.edu !ermine.itlab.stanford.edu !sable.itlab.stanford.edu
