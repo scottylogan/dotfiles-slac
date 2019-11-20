@@ -1,3 +1,5 @@
+# -*- sh -*-
+# .bashrc
 # .bashrc.local (Stanford)
 
 if [[ $- == *i* ]]; then
@@ -7,6 +9,10 @@ if [[ $- == *i* ]]; then
   ### ALIASES ###
 
   alias rkinit='kinit -c FILE:/tmp/swl.root --no-change-default --no-proxiable --no-forwardable swl/root'
+
+  alias rssh='KRB5CCNAME=FILE:/tmp/swl.root ssh -l swl.root'
+
+  alias ec2-run='/usr/local/bin/ec2-run --security-group-ids sg-063f1b0ea3bd34ecd,sg-0d1ee547a7c846ff6 --subnet-id subnet-a4fa79c1'
 
   function deb-s3 () {
     /usr/local/bin/deb-s3 $* --s3-region us-west-2 -b repo.itlab.stanford.edu
@@ -23,10 +29,10 @@ if [[ $- == *i* ]]; then
   #  in to this system)
   ssh-add -l >/dev/null 2>&1
   if [ $? -eq 1 -a ${TTY} = "/dev/ttys000" ]; then
-    ssh-add $HOME/.ssh/yubikey >/dev/null
-    ssh-add $HOME/.ssh/github_rsa >/dev/null
     ssh-add $HOME/.ssh/itlab-aws >/dev/null
+    ssh-add $HOME/.ssh/github_rsa >/dev/null
     ssh-add $HOME/.ssh/coreoscluster01.pem >/dev/null
+    ssh-add $HOME/.ssh/hosting.pem >/dev/null
   fi
 
 fi
