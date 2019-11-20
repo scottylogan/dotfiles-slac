@@ -1,8 +1,1 @@
-{
-  "debug" : true,
-  "insecure-registries" : [
-    "localhost:5000"
-  ],
-  "experimental" : true
-}
-
+{"debug":true,"insecure-registries":["localhost:5000"],"experimental":true}
