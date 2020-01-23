@@ -44,6 +44,26 @@ Host *.anchorage.stanford.edu
 Host git.stanford.edu
    User gitolite
 
+Host events
+  Hostname ucomm-prod2.stanford.edu
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  ForwardAgent yes
+  ForwardX11 no
+  ControlMaster no
+  ProxyCommand none
+  ControlPath none
+
+Host events-dev
+  Hostname webmaster2.stanford.edu
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  ForwardAgent yes
+  ForwardX11 no
+  ControlMaster no
+  ProxyCommand none
+  ControlPath none
+
 Host ermine.stanford.edu ermine.itlab.stanford.edu sable.stanford.edu sable.itlab.stanford.edu mineral.stanford.edu vegetable.stanford.edu cpauth.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication no
