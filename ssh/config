@@ -53,9 +53,19 @@ Host ermine.stanford.edu ermine.itlab.stanford.edu sable.stanford.edu sable.itla
   ControlMaster no
   ProxyCommand none
   ControlPath none
+  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
 Host ermine sable mineral vegetable cpauth who
   Hostname %h.stanford.edu
+  IdentityFile ~/.ssh/id_rsa
+  GSSAPIAuthentication no
+  GSSAPIDelegateCredentials no
+  ForwardAgent yes
+  ForwardX11 no
+  ControlMaster no
+  ProxyCommand none
+  ControlPath none
+  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
 Host cpauth.stanford.edu
   IdentityFile ~/.ssh/itlab-aws
