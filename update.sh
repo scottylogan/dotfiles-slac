@@ -16,7 +16,7 @@ fi
 
 # Unlock encrypted files
 
-if [ -d .git/git-crypt ]; then
+if [ -d .git-crypt ]; then
   echo Unlocking encrypted files
   git-crypt unlock
 fi
