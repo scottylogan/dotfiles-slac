@@ -23,7 +23,7 @@ Host *.itlab.stanford.edu !ermine.itlab.stanford.edu !sable.itlab.stanford.edu
   IdentityFile ~/.ssh/itlab-aws
   User admin
   GSSAPIAuthentication no
-  GSSAPIDelegateCredentials no
+  GSSAPIDelegateCredentials yes
   ForwardX11 no
   ControlMaster no
   ProxyCommand none
@@ -67,7 +67,7 @@ Host events-dev
 Host ermine.stanford.edu ermine.itlab.stanford.edu sable.stanford.edu sable.itlab.stanford.edu mineral.stanford.edu vegetable.stanford.edu cpauth.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication no
-  GSSAPIDelegateCredentials no
+  GSSAPIDelegateCredentials yes
   ForwardAgent yes
   ForwardX11 no
   ControlMaster no
@@ -75,11 +75,24 @@ Host ermine.stanford.edu ermine.itlab.stanford.edu sable.stanford.edu sable.itla
   ControlPath none
   RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
+Host radius-dev1.stanford.edu radius-dev2.stanford.edu
+  IdentityFile ~/.ssh/id_rsa
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  ForwardAgent yes
+  ForwardX11 no
+  ControlMaster no
+  ProxyJump swl@ermine.stanford.edu:22
+  ControlPath none
+  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
+
+Host radius-dev1.stanford.edu radius-dev2.stanford.edu
+
 Host ermine sable mineral vegetable cpauth who
   Hostname %h.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication no
-  GSSAPIDelegateCredentials no
+  GSSAPIDelegateCredentials yes
   ForwardAgent yes
   ForwardX11 no
   ControlMaster no
