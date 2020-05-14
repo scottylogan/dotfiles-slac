@@ -8,7 +8,7 @@ if [[ $- == *i* ]]; then
 
   ### ALIASES ###
 
-  alias rkinit='kinit -c FILE:/tmp/swl.root --no-change-default --no-proxiable --no-forwardable swl/root'
+  alias rkinit='kinit -c FILE:/tmp/swl.root --no-change-default --no-proxiable --no-forwardable swl/root@stanford.edu'
 
   alias rssh='KRB5CCNAME=FILE:/tmp/swl.root ssh -l swl.root'
 
