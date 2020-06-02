@@ -2,6 +2,7 @@
 
 cd $(dirname $0)
 here=$(pwd -P)
+relative=${here/$HOME\//}
 archive=${HOME}/.pre-dotfiles-stanford
 
 mkdir -p ${archive}
@@ -52,6 +53,6 @@ for file in *; do
     mv -f ${link} ${archive}
   fi
   echo Linking ${file}
-  ln -sfh ${here}/${file} ${link}
+  ln -sfh ${relative}/${file} ${link}
 done
 
