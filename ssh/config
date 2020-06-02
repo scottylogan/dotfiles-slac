@@ -75,7 +75,7 @@ Host ermine.stanford.edu ermine.itlab.stanford.edu sable.stanford.edu sable.itla
   ControlPath none
   RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
-Host radius-dev1.stanford.edu radius-dev2.stanford.edu
+Host radius-dev1.stanford.edu radius-dev2.stanford.edu radius-cert1.stanford.edu radius-cert2.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
@@ -86,7 +86,7 @@ Host radius-dev1.stanford.edu radius-dev2.stanford.edu
   ControlPath none
   RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
-Host radius-dev1.stanford.edu radius-dev2.stanford.edu
+#Host radius-dev1.stanford.edu radius-dev2.stanford.edu
 
 Host ermine sable mineral vegetable cpauth who
   Hostname %h.stanford.edu
