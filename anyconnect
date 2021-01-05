@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnyConnectPreferences>
+<DefaultUser>leland</DefaultUser>
+<DefaultSecondUser></DefaultSecondUser>
+<ClientCertificateThumbprint>84B737F0BD9C2065817BE306DB8598BC0E7A7A8D</ClientCertificateThumbprint>
+<MultipleClientCertificateThumbprints></MultipleClientCertificateThumbprints>
+<ServerCertificateThumbprint></ServerCertificateThumbprint>
+<DefaultHostName>su-vpn.stanford.edu</DefaultHostName>
+<DefaultHostAddress></DefaultHostAddress>
+<DefaultGroup>CardinalKey-FullTraffic</DefaultGroup>
+<ProxyHost></ProxyHost>
+<ProxyPort></ProxyPort>
+<SDITokenType>none</SDITokenType>
+<ControllablePreferences>
+<BlockUntrustedServers>false</BlockUntrustedServers>
+<LocalLanAccess>true</LocalLanAccess></ControllablePreferences>
+</AnyConnectPreferences>
