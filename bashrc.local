@@ -11,6 +11,7 @@ if [[ $- == *i* ]]; then
   alias rkinit='kinit -c FILE:/tmp/swl.root --no-change-default --no-proxiable --no-forwardable swl/root@stanford.edu'
 
   alias rssh='KRB5CCNAME=FILE:/tmp/swl.root ssh -l swl.root'
+  alias rscp='KRB5CCNAME=FILE:/tmp/swl.root scp'
 
   alias ec2-run='/usr/local/bin/ec2-run --security-group-ids sg-063f1b0ea3bd34ecd,sg-0d1ee547a7c846ff6 --subnet-id subnet-a4fa79c1'
 
