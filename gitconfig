@@ -27,3 +27,5 @@
 
 [tag]
 	sort = version:refname
+[pull]
+	rebase = false
