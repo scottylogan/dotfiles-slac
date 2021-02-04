@@ -5,7 +5,7 @@
 <ClientCertificateThumbprint>84B737F0BD9C2065817BE306DB8598BC0E7A7A8D</ClientCertificateThumbprint>
 <MultipleClientCertificateThumbprints></MultipleClientCertificateThumbprints>
 <ServerCertificateThumbprint></ServerCertificateThumbprint>
-<DefaultHostName>su-vpn.stanford.edu</DefaultHostName>
+<DefaultHostName>CardinalKey-FullTraffic</DefaultHostName>
 <DefaultHostAddress></DefaultHostAddress>
 <DefaultGroup>CardinalKey-FullTraffic</DefaultGroup>
 <ProxyHost></ProxyHost>
