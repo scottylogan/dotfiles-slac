@@ -10,7 +10,7 @@ Host bastion.*.stanford.edu
 
 #--- itlab ---
 
-Host code.stanford.edu uitgitaws.amazon.stanford.edu
+Host code.stanford.edu
   User git
   IdentityFile ~/.ssh/github_rsa
 
@@ -81,12 +81,36 @@ Host ermine.stanford.edu ermine.itlab.stanford.edu sable.stanford.edu sable.itla
   ControlPath none
   RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
+Host asinfraprd22.stanford.edu
+  IdentityFile ~/.ssh/id_rsa
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  ForwardAgent yes
+  ForwardX11 no
+
+Host www*.stanford.edu
+  IdentityFile ~/.ssh/id_rsa
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  ForwardAgent yes
+  ForwardX11 no
+  ControlMaster no
+  ProxyJump swl@asinfraprd22.stanford.edu:22
+  ControlPath none
+
 Host soup.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
   ForwardAgent yes
   ForwardX11 no
+
+Host uitgitaws.amazon.stanford.edu
+  User git
+  IdentityFile ~/.ssh/github_rsa
+  ControlMaster no
+  ProxyJump swl@soup.stanford.edu:22
+  ControlPath none
 
 Host radius-dev*.stanford.edu radius-cert*.stanford.edu radius0*.stanford.edu radius-proxy-dev* api*.stanford.edu wallet*.stanford.edu
   IdentityFile ~/.ssh/id_rsa
@@ -99,7 +123,7 @@ Host radius-dev*.stanford.edu radius-cert*.stanford.edu radius0*.stanford.edu ra
   ControlPath none
   RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
-Host kdc-*.stanford.edu tools*.stanford.edu
+Host kdc-*.stanford.edu tools*.stanford.edu debuild.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
