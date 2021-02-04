@@ -12,6 +12,7 @@ if [[ $- == *i* ]]; then
 
   alias rssh='KRB5CCNAME=FILE:/tmp/swl.root ssh -l swl.root'
   alias rscp='KRB5CCNAME=FILE:/tmp/swl.root scp'
+  alias wallet='KRB5CCNAME=FILE:/tmp/swl.root remctl wallet.stanford.edu wallet'
 
   alias ec2-run='/usr/local/bin/ec2-run --security-group-ids sg-063f1b0ea3bd34ecd,sg-0d1ee547a7c846ff6 --subnet-id subnet-a4fa79c1'
 
