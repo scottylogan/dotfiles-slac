@@ -1,1 +1,0 @@
-{"Name":"multi","Driver":"docker-container","Nodes":[{"Name":"multi0","Endpoint":"unix:///var/run/docker.sock","Platforms":null,"Flags":null,"ConfigFile":"","DriverOpts":{}}]}

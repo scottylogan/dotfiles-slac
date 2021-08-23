@@ -10,4 +10,5 @@ docker/config.json filter=git-crypt diff=git-crypt
 npmrc filter=git-crypt diff=git-crypt
 mylogin.cnf filter=git-crypt diff=git-crypt
 m2/*.xml* filter=git-crypt diff=git-crypt
+docker/.token_seed* filter=git-crypt diff=git-crypt
 .gitignore !filter !diff
