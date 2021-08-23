@@ -48,6 +48,15 @@ Host *.anchorage.stanford.edu
 
 Host git.stanford.edu
   User gitolite
+  IdentityFile ~/.ssh/id_rsa
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  ForwardAgent yes
+  ForwardX11 no
+  ControlMaster no
+  ProxyJump swl@soup.stanford.edu:22
+  ControlPath none
+  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
 
 Host events
@@ -119,11 +128,12 @@ Host radius-dev*.stanford.edu radius-cert*.stanford.edu radius0*.stanford.edu ra
   ForwardAgent yes
   ForwardX11 no
   ControlMaster no
-  ProxyJump swl@ermine.stanford.edu:22
+  ProxyJump swl@soup.stanford.edu:22
+#  ProxyJump swl@ermine.stanford.edu:22
   ControlPath none
   RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
-Host kdc-*.stanford.edu tools*.stanford.edu debuild.stanford.edu
+Host kdc-*.stanford.edu tools*.stanford.edu debuild.stanford.edu authz*.stanford.edu lemon*.stanford.edu idp-dev*.stanford.edu radius-proxy-dev*.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
@@ -173,8 +183,13 @@ Host *.stanford.edu
 Host github.com
    IdentityFile ~/.ssh/github_rsa
 
+Host animal.local
+   User swl
+
 Host *.catbert.net *.local
    User scotty
+   ForwardAgent yes
+   ForwardX11 no
    SendEnv TERM XAUTHORITY
    IdentityFile ~/.ssh/id_rsa
 
