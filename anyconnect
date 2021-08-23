@@ -2,12 +2,12 @@
 <AnyConnectPreferences>
 <DefaultUser>leland</DefaultUser>
 <DefaultSecondUser></DefaultSecondUser>
-<ClientCertificateThumbprint>84B737F0BD9C2065817BE306DB8598BC0E7A7A8D</ClientCertificateThumbprint>
+<ClientCertificateThumbprint>628AADA5AE67BCF05B7AB6A2ACFEF14CD73D2F27</ClientCertificateThumbprint>
 <MultipleClientCertificateThumbprints></MultipleClientCertificateThumbprints>
 <ServerCertificateThumbprint></ServerCertificateThumbprint>
-<DefaultHostName>CardinalKey-FullTraffic</DefaultHostName>
+<DefaultHostName>Lab-LSJU-Cert-Authn</DefaultHostName>
 <DefaultHostAddress></DefaultHostAddress>
-<DefaultGroup>CardinalKey-FullTraffic</DefaultGroup>
+<DefaultGroup>Lab-CardinalKey-VPN</DefaultGroup>
 <ProxyHost></ProxyHost>
 <ProxyPort></ProxyPort>
 <SDITokenType>none</SDITokenType>
