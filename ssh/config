@@ -186,6 +186,9 @@ Host github.com
 Host animal.local
    User swl
 
+Host beaker.catbert.net
+   User swl
+
 Host *.catbert.net *.local
    User scotty
    ForwardAgent yes
