@@ -1,13 +1,13 @@
 {
-  "insecure-registries" : [
-    "localhost:5000"
-  ],
-  "builder" : {
-    "gc" : {
-      "defaultKeepStorage" : "20GB",
-      "enabled" : true
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
     }
   },
-  "experimental" : true,
-  "debug" : true
+  "debug": true,
+  "experimental": true,
+  "features": {
+    "buildkit": true
+  }
 }
