@@ -1,13 +1,1 @@
-{
-  "insecure-registries" : [
-    "localhost:5000"
-  ],
-  "builder" : {
-    "gc" : {
-      "defaultKeepStorage" : "20GB",
-      "enabled" : true
-    }
-  },
-  "experimental" : true,
-  "debug" : true
-}
+{"experimental":false,"data-root":"/Volumes/Stuff/Docker","builder":{"gc":{"enabled":true,"defaultKeepStorage":"20GB"}},"features":{"buildkit":true}}
