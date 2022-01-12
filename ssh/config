@@ -59,7 +59,7 @@ Host git.stanford.edu
   RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
 
-Host events
+Host ucomm-prod2.stanford.edu
   Hostname ucomm-prod2.stanford.edu
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
@@ -76,7 +76,7 @@ Host events-dev
   ForwardAgent yes
   ForwardX11 no
   ControlMaster no
-  ProxyCommand none
+  ProxyJump swl@soup.stanford.edu:22
   ControlPath none
 
 Host ermine.stanford.edu ermine.itlab.stanford.edu sable.stanford.edu sable.itlab.stanford.edu mineral.stanford.edu vegetable.stanford.edu cpauth.stanford.edu
