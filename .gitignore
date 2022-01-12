@@ -1,2 +1,3 @@
 docker/.buildNodeID
 aws/sso/
+docker/mutagen/daemon/daemon.lock
