@@ -24,11 +24,12 @@ Host iso-terraformer.itlab.stanford.edu iso-terraformer.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   ForwardAgent yes
 
-Host *.itlab.stanford.edu !ermine.itlab.stanford.edu !sable.itlab.stanford.edu
-  IdentityFile ~/.ssh/itlab-aws
-  User admin
+Host *.itlab.stanford.edu
+  IdentityFile ~/.ssh/id_rsa
+  User swl
   GSSAPIAuthentication no
   GSSAPIDelegateCredentials yes
+  ForwardAgent yes
   ForwardX11 no
   ControlMaster no
   ProxyCommand none
@@ -48,15 +49,15 @@ Host *.anchorage.stanford.edu
 
 Host git.stanford.edu
   User gitolite
-  IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
   ForwardAgent yes
   ForwardX11 no
   ControlMaster no
-  ProxyJump swl@soup.stanford.edu:22
+  HostkeyAlgorithms +ssh-rsa
+  ProxyJump swl@soup.stanford.edu
   ControlPath none
-  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
+  #RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
 
 Host ucomm-prod2.stanford.edu
@@ -121,7 +122,7 @@ Host uitgitaws.amazon.stanford.edu
   ProxyJump swl@soup.stanford.edu:22
   ControlPath none
 
-Host radius-dev*.stanford.edu radius-cert*.stanford.edu radius0*.stanford.edu radius-proxy-dev* api*.stanford.edu wallet*.stanford.edu
+Host radius-dev*.stanford.edu radius-cert*.stanford.edu radius0*.stanford.edu radius-proxy-dev* api*.stanford.edu wallet*.stanford.edu puppet.infra.stanford.edu
   IdentityFile ~/.ssh/id_rsa
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
@@ -201,10 +202,10 @@ Host *.catbert.net *.local
 # send keepalive packets every 5 minutes
 # keep connections alive for 4 hours
 Host * !localhost
-   ForwardAgent no
+   ForwardAgent yes
    ForwardX11 no
-   GSSAPIAuthentication no
-   GSSAPIDelegateCredentials no
+   GSSAPIAuthentication yes
+   GSSAPIDelegateCredentials yes
    CheckHostIP no
 #   GSSAPIKeyExchange no
    ServerAliveInterval 300
