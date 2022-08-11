@@ -5,7 +5,6 @@
       "enabled": true
     }
   },
-  "data-root":"/Volumes/Stuff/Docker",
   "debug": true,
   "experimental": true,
   "features": {
