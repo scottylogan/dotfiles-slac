@@ -4,3 +4,4 @@ export GIT_AUTHOR_EMAIL=${MAIL}
 export GIT_COMMITTER_EMAIL=${GIT_AUTHOR_EMAIL}
 export KRB5_CONFIG=$HOME/.krb5.conf
 export VAULT_ADDR=https://vault.stanford.edu
+export PS_CLOUD_MYSQL_PORT=3307
