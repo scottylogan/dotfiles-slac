@@ -1,188 +1,59 @@
-#--- Stanford Bastions ---
+#--- IT Lab ---
 
-Host bastion.*.stanford.edu
-  User swl
+Host *.itlab.stanford.edu ermine.stanford.edu sable.stanford.edu mineral.stanford.edu vegetable.stanford.edu animal.stanford.edu
   IdentityFile ~/.ssh/id_rsa
+  User swl
   ForwardAgent yes
-#  PubkeyAuthentication no
-#  GSSAPIAuthentication yes
-#  GSSAPIDelegateCredentials yes
+  ProxyJump none
+  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
-#--- itlab ---
+
+#--- Stanford ---
 
 Host code.stanford.edu
   User git
   IdentityFile ~/.ssh/github_rsa
-
-Host webapp.itlab.stanford.edu
-  User swl
-  IdentityFile ~/.ssh/id_rsa
-  ForwardAgent yes
-
-Host iso-terraformer.itlab.stanford.edu iso-terraformer.stanford.edu
-  User swl
-  IdentityFile ~/.ssh/id_rsa
-  ForwardAgent yes
-
-Host *.itlab.stanford.edu
-  IdentityFile ~/.ssh/id_rsa
-  User swl
-  GSSAPIAuthentication no
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-  ControlMaster no
-  ProxyCommand none
-  ControlPath none
-
-#--- anchorage ---
-
-Host *.anchorage.stanford.edu
-  ControlMaster no
-   ProxyCommand none
-   ControlPath none
-   ForwardAgent no
-   ForwardX11 no
-
-
-#--- stanford ---
+  ProxyJump none
 
 Host git.stanford.edu
   User gitolite
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-  ControlMaster no
   HostkeyAlgorithms +ssh-rsa
-  ProxyJump swl@soup.stanford.edu
-  ControlPath none
-  #RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
-
-
-Host ucomm-prod2.stanford.edu
-  Hostname ucomm-prod2.stanford.edu
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-  ControlMaster no
-  ProxyCommand none
-  ControlPath none
-
-Host events-dev
-  Hostname webmaster2.stanford.edu
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-  ControlMaster no
-  ProxyJump swl@soup.stanford.edu:22
-  ControlPath none
-
-Host ermine.stanford.edu ermine.itlab.stanford.edu sable.stanford.edu sable.itlab.stanford.edu mineral.stanford.edu vegetable.stanford.edu cpauth.stanford.edu
-  IdentityFile ~/.ssh/id_rsa
-  GSSAPIAuthentication no
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-  ControlMaster no
-  ProxyCommand none
-  ControlPath none
-  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
-
-Host asinfraprd22.stanford.edu
-  IdentityFile ~/.ssh/id_rsa
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-
-Host www*.stanford.edu
-  IdentityFile ~/.ssh/id_rsa
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-  ControlMaster no
-  ProxyJump swl@asinfraprd22.stanford.edu:22
-  ControlPath none
-
-Host soup.stanford.edu
-  IdentityFile ~/.ssh/id_rsa
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
 
 Host uitgitaws.amazon.stanford.edu
   User git
   IdentityFile ~/.ssh/github_rsa
-  ControlMaster no
-  ProxyJump swl@soup.stanford.edu:22
-  ControlPath none
 
-Host radius-dev*.stanford.edu radius-cert*.stanford.edu radius0*.stanford.edu radius-proxy-dev* api*.stanford.edu wallet*.stanford.edu puppet.infra.stanford.edu
-  IdentityFile ~/.ssh/id_rsa
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-  ControlMaster no
-  ProxyJump swl@soup.stanford.edu:22
-#  ProxyJump swl@ermine.stanford.edu:22
-  ControlPath none
-  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
+Host events-dev
+  Hostname webmaster2.stanford.edu
 
-Host kdc-*.stanford.edu tools*.stanford.edu debuild.stanford.edu authz*.stanford.edu lemon*.stanford.edu idp-dev*.stanford.edu radius-proxy-dev*.stanford.edu
-  IdentityFile ~/.ssh/id_rsa
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-  ControlMaster no
-  ProxyJump swl@soup.stanford.edu:22
-  ControlPath none
-  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
-
-
-#Host radius-dev1.stanford.edu radius-dev2.stanford.edu
-
-Host ermine sable mineral vegetable cpauth who
-  Hostname %h.stanford.edu
-  IdentityFile ~/.ssh/id_rsa
-  GSSAPIAuthentication no
-  GSSAPIDelegateCredentials yes
-  ForwardAgent yes
-  ForwardX11 no
-  ControlMaster no
+Host soup.stanford.edu
+  ControlPersist yes
+  ProxyJump none
   ProxyCommand none
-  ControlPath none
-  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
-
-Host cpauth.stanford.edu
-  IdentityFile ~/.ssh/itlab-aws
-  User admin
 
 Host cardinal cardinal? corn corn??
   HostName %h.stanford.edu
 
 Host cardinal cardinal? cardinal.stanford.edu cardinal?.stanford.edu
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
+  ProxyJump none
 
 Host *.stanford.edu
   User swl
-  ForwardAgent no
-  ForwardX11 no
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
+  ProxyJump swl@soup.stanford.edu
+  ControlMaster auto
+  ControlPath "%d/.ssh/sockets/%n"
+
 
 
 #--- github ---
 
 Host github.com
    IdentityFile ~/.ssh/github_rsa
+
+
+#--- local / catbert ---
 
 Host animal.local
    User swl
@@ -204,10 +75,6 @@ Host *.catbert.net *.local
 Host * !localhost
    ForwardAgent yes
    ForwardX11 no
-   GSSAPIAuthentication yes
-   GSSAPIDelegateCredentials yes
-   CheckHostIP no
-#   GSSAPIKeyExchange no
    ServerAliveInterval 300
    ServerAliveCountMax 48
    HashKnownHosts yes
