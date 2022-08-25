@@ -4,7 +4,7 @@
 	signingkey = 312718A0
 
 [core]
-	editor = emacsclient -n
+	editor = emacsclient
 	excludesfile = ~/.gitignore_global
 
 [push]
