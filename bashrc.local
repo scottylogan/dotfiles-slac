@@ -27,12 +27,13 @@ if [[ $- == *i* ]]; then
 
   if [ "${WALLET_IMPL}" == 'native' ]; then
     alias rwallet="KRB5CCNAME=KCM:${UID}:root wallet"
+    alias wallet-report="KRB5CCNAME=KCM:${UID}:root remctl wallet.stanford.edu wallet-report"
   else
     alias wallet='remctl wallet.stanford.edu wallet'
-    alias rwallet="KRB5CCNAME=KCM:${UID}:root remctl wallet.stanford.edu wallet"
+    alias rwallet='KRB5CCNAME=FILE:/tmp/swl.root remctl wallet.stanford.edu wallet'
+    alias wallet-report='KRB5CCNAME=FILE:/tmp/swl.root remctl wallet.stanford.edu wallet-report'
   fi
 
-  alias wallet-report='KRB5CCNAME=FILE:/tmp/swl.root remctl wallet.stanford.edu wallet-report'
 
 #  alias ec2-run='/usr/local/bin/ec2-run --security-group-ids sg-063f1b0ea3bd34ecd,sg-0d1ee547a7c846ff6 --subnet-id subnet-a4fa79c1'
 
