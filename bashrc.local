@@ -57,6 +57,8 @@ if [[ $- == *i* ]]; then
     ssh-add $HOME/.ssh/github_rsa >/dev/null
     ssh-add $HOME/.ssh/coreoscluster01.pem >/dev/null
     ssh-add $HOME/.ssh/hosting.pem >/dev/null
+    ssh-add $HOME/.ssh/id_rsa >/dev/null
+    ssh-add $HOME/.ssh/id_ed25519 >/dev/null
   fi
 
 fi

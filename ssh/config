@@ -27,6 +27,8 @@ Host events-dev
   Hostname webmaster2.stanford.edu
 
 Host soup.stanford.edu
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
   ControlPersist yes
   ProxyJump none
   ProxyCommand none
