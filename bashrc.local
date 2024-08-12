@@ -37,8 +37,8 @@ if [[ $- == *i* ]]; then
 
 #  alias ec2-run='/usr/local/bin/ec2-run --security-group-ids sg-063f1b0ea3bd34ecd,sg-0d1ee547a7c846ff6 --subnet-id subnet-a4fa79c1'
 
-  function deb-s3 () {
-    /usr/local/bin/deb-s3 $* --s3-region us-west-2 -b repo.itlab.stanford.edu
+  function debs3 () {
+    deb-s3 $* --s3-region us-west-2 -b repo.itlab.stanford.edu
   }
 
   ## SSH AGENT ###
@@ -53,12 +53,12 @@ if [[ $- == *i* ]]; then
   ssh-add -l >/dev/null 2>&1
 #  if [ $? -eq 1 -a ${TTY} = "/dev/ttys000" ]; then
   if [ $? -eq 1 ]; then
-    ssh-add $HOME/.ssh/itlab-aws >/dev/null
-    ssh-add $HOME/.ssh/github_rsa >/dev/null
-    ssh-add $HOME/.ssh/coreoscluster01.pem >/dev/null
-    ssh-add $HOME/.ssh/hosting.pem >/dev/null
-    ssh-add $HOME/.ssh/id_rsa >/dev/null
-    ssh-add $HOME/.ssh/id_ed25519 >/dev/null
+    [ -f $HOME/.ssh/id_rsa-cert.pub ] && ssh-add -q -C $HOME/.ssh/id_rsa >/dev/null
+    [ -f $HOME/.ssh/id_ed25519-cert.pub ] && ssh-add -q -C $HOME/.ssh/id_ed25519 >/dev/null
+    ssh-add -q $HOME/.ssh/itlab-aws >/dev/null
+    ssh-add -q $HOME/.ssh/github_rsa >/dev/null
+    ssh-add -q $HOME/.ssh/id_rsa >/dev/null
+    ssh-add -q $HOME/.ssh/id_ed25519 >/dev/null
   fi
 
 fi

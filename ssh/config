@@ -1,16 +1,21 @@
+#PKCS11Provider=/usr/lib/ssh-keychain.dylib
+#PKCS11Provider=/opt/local//libexec/ssh-pkcs11-helper
 #--- IT Lab ---
 
 Host *.itlab.stanford.edu ermine.stanford.edu sable.stanford.edu mineral.stanford.edu vegetable.stanford.edu animal.stanford.edu
   IdentityFile ~/.ssh/id_rsa
+  PubkeyAcceptedAlgorithms ^ssh-rsa-cert-v01@openssh.com
   User swl
   ForwardAgent yes
   ProxyJump none
-  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
+  ControlMaster no
+  ControlPath none
+#  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
 
 
 #--- Stanford ---
 
-Host code.stanford.edu
+Host code.stanford.edu gitlab.med.stanford.edu
   User git
   IdentityFile ~/.ssh/github_rsa
   ProxyJump none
@@ -26,7 +31,8 @@ Host uitgitaws.amazon.stanford.edu
 Host events-dev
   Hostname webmaster2.stanford.edu
 
-Host soup.stanford.edu
+Host soup.stanford.edu salad.stanford.edu
+  User swl
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
   ControlPersist yes
@@ -39,6 +45,7 @@ Host cardinal cardinal? corn corn??
 Host cardinal cardinal? cardinal.stanford.edu cardinal?.stanford.edu
   ProxyJump none
 
+#Host *.stanford.edu !soup.stanford.edu !salad.stanford.edu
 Host *.stanford.edu
   User swl
   GSSAPIAuthentication yes
@@ -60,8 +67,8 @@ Host github.com
 Host animal.local
    User swl
 
-Host beaker.catbert.net
-   User swl
+Host beaker.local
+  AddressFamily inet
 
 Host *.catbert.net *.local
    User scotty
@@ -80,4 +87,15 @@ Host * !localhost
    ServerAliveInterval 300
    ServerAliveCountMax 48
    HashKnownHosts yes
+
+Host default
+  HostName 127.0.0.1
+  User vagrant
+  Port 50022
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/swl/.vagrant.d/insecure_private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
 

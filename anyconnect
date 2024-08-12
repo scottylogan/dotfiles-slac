@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AnyConnectPreferences>
-<DefaultUser>leland</DefaultUser>
+<DefaultUser>swl</DefaultUser>
 <DefaultSecondUser></DefaultSecondUser>
 <ClientCertificateThumbprint>A31311D5DB16F2DAF264BD8A302249620EC0F18E</ClientCertificateThumbprint>
 <MultipleClientCertificateThumbprints></MultipleClientCertificateThumbprints>
 <ServerCertificateThumbprint></ServerCertificateThumbprint>
-<DefaultHostName>CardinalKey-FullTraffic</DefaultHostName>
+<DefaultHostName>su-vpn.stanford.edu</DefaultHostName>
 <DefaultHostAddress></DefaultHostAddress>
-<DefaultGroup>Lab-CardinalKey-VPN</DefaultGroup>
+<DefaultGroup>CardinalKey-FullTraffic</DefaultGroup>
 <ProxyHost></ProxyHost>
 <ProxyPort></ProxyPort>
 <SDITokenType>none</SDITokenType>
