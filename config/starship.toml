@@ -18,7 +18,7 @@ format = '[$path]($style)'
 
 [hostname]
 ssh_only = true
-format = '[$ssh_symbol$hostname]($style)'
+format = '[$hostname]($style)'
 
 [package]
 disabled = true
