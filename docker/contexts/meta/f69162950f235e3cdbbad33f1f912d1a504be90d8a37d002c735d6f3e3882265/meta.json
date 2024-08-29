@@ -1,0 +1,1 @@
+{"Name":"arm64","Metadata":{"Description":"aarch64 docker"},"Endpoints":{"docker":{"Host":"unix:///Users/swl/.lima/docker-arm64/sock/docker.sock","SkipTLSVerify":false}}}
