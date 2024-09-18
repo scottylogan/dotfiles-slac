@@ -1,0 +1,5 @@
+ci: pipeline ci
+co: mr checkout
+create: repo create
+list: repo list
+search: repo search
