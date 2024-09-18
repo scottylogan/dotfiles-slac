@@ -6,42 +6,46 @@ if [[ $- == *i* ]]; then
 
 ### INTERACTIVE SHELL ###
 
-  export KRB5_IMPL=native
-  [ "$(type -p kinit)" == '/opt/local/bin/kinit' ] && KRB5_IMPL=macports
-
-  export WALLET_IMPL=alias
-  [ "$(type -t wallet)" == 'file' ] && WALLET_IMPL=native
-
   ### ALIASES ###
 
-  if [ "${KRB5_IMPL}" == 'macports' ]; then
-    alias rkinit="kinit -c KCM:${UID}:root -P -F swl/root@stanford.edu"
-    alias akinit="kinit -c KCM:${UID}:admin -P -F swl/admin@stanford.edu"
-  else
-    alias rkinit="kinit -c KCM:${UID}:root --no-change-default --no-proxiable --no-forwardable swl/root@stanford.edu"
-    alias akinit="kinit -c KCM:${UID}:admin --no-change-default --no-proxiable --no-forwardable swl/admin@stanford.edu"
-  fi
+  alias rkinit="kinit --no-change-default --no-proxiable --no-forwardable swl/root@stanford.edu"
+  alias akinit="kinit --no-change-default --no-proxiable --no-forwardable swl/admin@stanford.edu"
 
-  alias rssh="KRB5CCNAME=KCM:${UID}:root ssh -l swl.root"
-  alias rscp="KRB5CCNAME=KCM:${UID}:root scp -o User=swl.root"
+  [ -z  "$(type -p wallet)" ] && alias wallet='remctl wallet.stanford.edu wallet'
 
-  if [ "${WALLET_IMPL}" == 'native' ]; then
-    alias rwallet="KRB5CCNAME=KCM:${UID}:root wallet"
-    alias wallet-report="KRB5CCNAME=KCM:${UID}:root remctl wallet.stanford.edu wallet-report"
-  else
-    alias wallet='remctl wallet.stanford.edu wallet'
-    alias rwallet='KRB5CCNAME=FILE:/tmp/swl.root remctl wallet.stanford.edu wallet'
-    alias wallet-report='KRB5CCNAME=FILE:/tmp/swl.root remctl wallet.stanford.edu wallet-report'
-  fi
+  ### FUNCTIONS ###
 
+  function rwallet {
+    krb5cc=$(klist -l | awk '/swl.root/ { print $2 }')
+    KRB5CCNAME=$krb5cc wallet $*
+  }
 
-#  alias ec2-run='/usr/local/bin/ec2-run --security-group-ids sg-063f1b0ea3bd34ecd,sg-0d1ee547a7c846ff6 --subnet-id subnet-a4fa79c1'
+  function wallet-report {
+    krb5cc=$(klist -l | awk '/swl.root/ { print $2 }')
+    KRB5CCNAME=$krb5cc remctl wallet.stanford.edu wallet-report $*
+  }
+
+  function rssh {
+    krb5cc=$(klist -l | awk '/swl.root/ { print $2 }')
+    KRB5CCNAME=$krb5cc ssh -l swl.root $*
+  }
+
+  function rscp {
+    krb5cc=$(klist -l | awk '/swl.root/ { print $2 }')
+    KRB5CCNAME=$krb5cc scp -o User=swl.root $*
+  }
 
   function debs3 () {
     deb-s3 $* --s3-region us-west-2 -b repo.itlab.stanford.edu
   }
 
-  ## SSH AGENT ###
+  function bastion {
+    domain=${1:-itlab}
+    ssh bastion.${domain}.stanford.edu
+  }
+
+  ### SSH AGENT ###
+
   # ssh-add -l returns:
   #   0 if the agent can be contacted and has keys
   #   1 if the agent can be contacted but has no keys
