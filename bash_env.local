@@ -1,3 +1,4 @@
+export GITLAB_HOST=https://code.stanford.edu
 export MAIL=swl@stanford.edu
 export AWS_DEFAULT_PROFILE=itlab
 export GIT_AUTHOR_EMAIL=${MAIL}
