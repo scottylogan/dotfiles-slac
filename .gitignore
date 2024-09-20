@@ -2,3 +2,4 @@ docker/.buildNodeID
 aws/sso/
 daemon.lock
 config/configstore/update-notifier-alex.json
+config/packer
