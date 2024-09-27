@@ -1,0 +1,41 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: FreeRADIUS
+scope: source.freeradius
+contexts:
+  main:
+    - match: \b(if|else|elsif|foreach|switch|case|update|redundant|load-balance|return)\b
+      scope: keyword.control.freeradius
+    - match: '"'
+      push: dqstring
+    - match: "'"
+      push: sqstring
+    - match: \b(Auth-Type|Autz-Type|Post-Auth-Type|Post-Proxy-Type)\b
+      scope: keyword.control.freeradius
+    - match: \b(cache|coa|eap|inner-eap|limit|listen|recv-coa|send-coa|tls|verify)\b
+      scope: keyword.control.freeradius
+    - match: \b(accounting|authenticate|authorize|client|clients|dhcp|home_server|home_server_pool|listen|post-auth|post-proxy|pre-proxy|preacct|realm|server|session)\b
+      scope: keyword.control.freeradius
+    - match: '&\b(\w+(([-_:]\w+)([-_]\w+)*)?)\b'
+      scope: entity.name.label.freeradius
+    - match: \#.*
+      scope: comment.line.freeradius
+    - match: '\/\*'
+      push:
+        - meta_scope: comment.block.freeradius
+        - match: '\*\/'
+          pop: true
+    
+  dqstring:
+    - meta_scope: string.quoted.double.freeradius
+    - match: \\.
+      scope: constant.character.escape.freeradius
+    - match: '"'
+      pop: true
+  sqstring:
+    - meta_scope: string.quoted.single.freeradius
+    - match: \\.
+      scope: constant.character.escape.freeradius
+    - match: "'"
+      pop: true
