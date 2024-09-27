@@ -1,1 +1,0 @@
-{"Name":"linux","Driver":"docker-container","Nodes":[{"Name":"linux0","Endpoint":"unix:///var/run/docker.sock","Platforms":[{"architecture":"amd64","os":"linux"},{"architecture":"arm64","os":"linux"},{"architecture":"arm","os":"linux","variant":"v7"}],"Flags":null,"ConfigFile":"","DriverOpts":{}}],"Dynamic":false}
