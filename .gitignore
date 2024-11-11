@@ -5,3 +5,4 @@ config/configstore/update-notifier-alex.json
 config/packer
 config/gcloud
 docker/buildx
+docker/config.json
