@@ -1,1 +1,6 @@
-iterm2/
+*.socket=
+*.socket.lock
+iterm2/AppSupport/SavedState/
+iterm2/AppSupport/iTermServer*
+iterm2/AppSupport/parsers/
+iterm2/AppSupport/version.txt
