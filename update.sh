@@ -1,6 +1,7 @@
 #! /bin/bash
 
-cd $(dirname $0)
+cd "$(dirname "${0}")" || exit
+
 here=$(pwd -P)
 relative=${here/$HOME\//}
 archive=${HOME}/.pre-dotfiles-stanford
@@ -28,31 +29,31 @@ fi
 
 chmod -R 0400 ${here}/s3cfg* ${here}/npmrc
 
-find ${here}/aws ${here}/docker ${here}/ssh -type f | xargs chmod 0400 
+find "${here}/aws" "${here}/docker" "${here}/ssh" -type f -print0 | xargs -0 chmod 0400 
 
-chmod 0700 ${here}/aws ${here}/docker ${here}/ssh
+chmod 0700 "${here}/aws" "${here}/docker" "${here}/ssh"
 
 ## Loosen up some SSH file permissions - config, pub keys
 
-chmod 0444 ${here}/ssh/config
-chmod 0444 ${here}/ssh/authorized_keys
-chmod 0444 ${here}/ssh/*.pub
+chmod 0444 "${here}/ssh/config"
+chmod 0444 "${here}/ssh/authorized_keys"
+chmod 0444 "${here}/ssh/"*.pub
 
 ## Allow writes to ssh known_hosts and sockets
 
-chmod 0644 ${here}/ssh/known_hosts
-chmod 0700 ${here}/ssh/sockets
+chmod 0644 "${here}/ssh/known_hosts"
+chmod 0700 "${here}/ssh/sockets"
 
 # (Re-)Link files
 
 for file in *; do
-  [ $file == $(basename $0) ] && continue;
+  [ "${file}" == "$(basename ${0})" ] && continue;
   link=${HOME}/.${file}
-  if [ -e ${link} -a ! -L ${link} ]; then
-    echo Saving old .${file}
-    mv -f ${link} ${archive}
+  if [ -e "${link}" ] && [ ! -L "${link}" ]; then
+    echo Saving old ".${file}"
+    mv -f "${link}" "${archive}"
   fi
-  echo Linking ${file}
-  ln -sfh ${relative}/${file} ${link}
+  echo Linking "${file}"
+  ln -sfh "${relative}/${file}" "${link}"
 done
 
