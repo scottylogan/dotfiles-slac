@@ -1,5 +1,15 @@
 #PKCS11Provider=/usr/lib/ssh-keychain.dylib
 #PKCS11Provider=/opt/local//libexec/ssh-pkcs11-helper
+
+Host flatcar
+  HostName localhost
+  Port 2222
+  User core
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  SetEnv LANG=C LC_ALL=C LC_COLLATE=C LC_MESSAGES=C
+
+
 #--- IT Lab ---
 
 Host *.itlab.stanford.edu ermine.stanford.edu sable.stanford.edu mineral.stanford.edu vegetable.stanford.edu animal.stanford.edu
