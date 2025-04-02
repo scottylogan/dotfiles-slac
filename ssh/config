@@ -9,6 +9,12 @@ Host flatcar
   UserKnownHostsFile /dev/null
   SetEnv LANG=C LC_ALL=C LC_COLLATE=C LC_MESSAGES=C
 
+#--- pico.sh ---
+
+Host pico.sh, prose.sh
+  IdentityFile ~/.ssh/pico-sh
+  IdentitiesOnly yes
+  User scotty
 
 #--- IT Lab ---
 
