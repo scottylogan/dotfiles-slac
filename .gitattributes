@@ -4,6 +4,7 @@ docker/config.json filter=git-crypt diff=git-crypt
 aws/* filter=git-crypt diff=git-crypt
 config/hub filter=git-crypt diff=git-crypt
 github-tokens/* filter=git-crypt diff=git-crypt
+config/glab-cli/config.* filter=git-crypt diff=git-crypt
 gnupg/*.gpg filter=git-crypt diff=git-crypt
 s3cfg* filter=git-crypt diff=git-crypt
 docker/config.json filter=git-crypt diff=git-crypt
