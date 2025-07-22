@@ -1,6 +1,0 @@
-*.socket=
-*.socket.lock
-AppSupport/SavedState/
-AppSupport/iTermServer*
-AppSupport/parsers/
-AppSupport/version.txt
