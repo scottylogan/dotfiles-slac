@@ -1,14 +1,3 @@
-#PKCS11Provider=/usr/lib/ssh-keychain.dylib
-#PKCS11Provider=/opt/local//libexec/ssh-pkcs11-helper
-
-Host flatcar
-  HostName localhost
-  Port 2222
-  User core
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-  SetEnv LANG=C LC_ALL=C LC_COLLATE=C LC_MESSAGES=C
-
 #--- pico.sh ---
 
 Host pico.sh, prose.sh
@@ -16,52 +5,17 @@ Host pico.sh, prose.sh
   IdentitiesOnly yes
   User scotty
 
-#--- IT Lab ---
-
-Host *.itlab.stanford.edu ermine.stanford.edu sable.stanford.edu mineral.stanford.edu vegetable.stanford.edu animal.stanford.edu
-  IdentityFile ~/.ssh/id_rsa
-  PubkeyAcceptedAlgorithms ^ssh-rsa-cert-v01@openssh.com
-  User swl
-  ForwardAgent yes
-  ProxyJump none
-  ControlMaster no
-  ControlPath none
-#  RemoteForward /home/swl/.gnupg/S.gpg-agent /Users/swl/.gnupg/S.gpg-agent.extra
-
 
 #--- Stanford ---
 
-Host code.stanford.edu gitlab.med.stanford.edu
+Host code.stanford.edu
   User git
   IdentityFile ~/.ssh/github_rsa
   ProxyJump none
-
-Host git.stanford.edu
-  User gitolite
-  HostkeyAlgorithms +ssh-rsa
-
-Host uitgitaws.amazon.stanford.edu
-  User git
-  IdentityFile ~/.ssh/github_rsa
-
-Host events-dev
-  Hostname webmaster2.stanford.edu
-
-Host soup.stanford.edu salad.stanford.edu
-  User swl
-  GSSAPIAuthentication yes
-  GSSAPIDelegateCredentials yes
-  ControlPersist yes
-  ProxyJump none
-  ProxyCommand none
 
 Host cardinal cardinal? corn corn??
   HostName %h.stanford.edu
 
-Host cardinal cardinal? cardinal.stanford.edu cardinal?.stanford.edu
-  ProxyJump none
-
-#Host *.stanford.edu !soup.stanford.edu !salad.stanford.edu
 Host *.stanford.edu
   User swl
   GSSAPIAuthentication yes
@@ -69,7 +23,6 @@ Host *.stanford.edu
   ProxyJump swl@soup.stanford.edu
   ControlMaster auto
   ControlPath "%d/.ssh/sockets/%n"
-
 
 
 #--- github ---
