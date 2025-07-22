@@ -4,9 +4,9 @@ cd "$(dirname "${0}")" || exit
 
 here=$(pwd -P)
 relative=${here/$HOME\//}
-archive=${HOME}/.pre-dotfiles-stanford
 
-mkdir -p ${archive}
+link="/bin/ln -sfh"
+[[ -f /etc/os-release ]] && link="ln -sfn"
 
 # Initialize / update any git submodules
 
@@ -23,11 +23,33 @@ if [ -d .git-crypt ]; then
   git-crypt unlock
 fi
 
+# (Re-)Link files
+
+for file in *; do
+  [ "${file}" == "config" ] && continue;
+  [ "${file}" == "$(basename "${0}")" ] && continue;
+  target=${HOME}/.${file}
+  echo Linking "${file}"
+  ${link} "${relative}/${file}" "${target}"
+done
+
+# handle config directory, which is shared between this repo and others
+if [ -d config ]; then
+  # make ~/.config if it doesn't exist
+  [ -d "${HOME}/.config" ] || mkdir "${HOME}/.config"
+
+  for thing in config/*; do
+    target="${HOME}/.config/$(basename "${thing}")"
+    echo Linking ".${thing}"
+    ${link} "${HOME}/${relative}/${thing}" "${target}"
+  done
+fi
+
 # Fix permissions
 
 ## Make a bunch of files readable only by user
 
-chmod -R 0400 ${here}/s3cfg* ${here}/npmrc
+chmod -R 0400 "${here}/npmrc"
 
 find "${here}/aws" "${here}/docker" "${here}/ssh" -type f -print0 | xargs -0 chmod 0400 
 
@@ -44,16 +66,4 @@ chmod 0444 "${here}/ssh/"*.pub
 chmod 0644 "${here}/ssh/known_hosts"
 chmod 0700 "${here}/ssh/sockets"
 
-# (Re-)Link files
-
-for file in *; do
-  [ "${file}" == "$(basename ${0})" ] && continue;
-  link=${HOME}/.${file}
-  if [ -e "${link}" ] && [ ! -L "${link}" ]; then
-    echo Saving old ".${file}"
-    mv -f "${link}" "${archive}"
-  fi
-  echo Linking "${file}"
-  ln -sfh "${relative}/${file}" "${link}"
-done
 
