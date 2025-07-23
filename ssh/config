@@ -20,10 +20,6 @@ Host *.stanford.edu
   User swl
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
-  ProxyJump swl@soup.stanford.edu
-  ControlMaster auto
-  ControlPath "%d/.ssh/sockets/%n"
-
 
 #--- github ---
 
