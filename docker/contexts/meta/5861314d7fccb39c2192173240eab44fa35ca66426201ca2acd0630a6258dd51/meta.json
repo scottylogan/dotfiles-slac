@@ -1,1 +1,1 @@
-{"Name":"amd64","Metadata":{"Description":"x86-64 docker"},"Endpoints":{"docker":{"Host":"unix:///Users/swl/.lima/docker-amd64/sock/docker.sock","SkipTLSVerify":false}}}
+{"Name":"amd64","Metadata":{},"Endpoints":{"docker":{"Host":"unix:///Users/swl/.lima/amd64/sock/docker.sock","SkipTLSVerify":false}}}
