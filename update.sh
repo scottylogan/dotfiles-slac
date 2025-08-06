@@ -26,10 +26,11 @@ fi
 # (Re-)Link files
 
 for file in *; do
-  [ "${file}" == "config" ] && continue;
-  [ "${file}" == "$(basename "${0}")" ] && continue;
-  target=${HOME}/.${file}
-  echo Linking "${file}"
+  # skip config directory
+  [ "${file}" == "config" ] && continue
+  [ "${file}" == "$(basename "${0}")" ] && continue
+  target="${HOME}/.${file}"
+  echo Linking ".${file}"
   ${link} "${relative}/${file}" "${target}"
 done
 
@@ -65,5 +66,4 @@ chmod 0444 "${here}/ssh/"*.pub
 
 chmod 0644 "${here}/ssh/known_hosts"
 chmod 0700 "${here}/ssh/sockets"
-
 
