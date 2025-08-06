@@ -16,6 +16,28 @@ Host code.stanford.edu
 Host cardinal cardinal? corn corn??
   HostName %h.stanford.edu
 
+Host jump.slac.stanford.edu
+  User swl
+  GSSAPIAuthentication no
+  GSSAPIDelegateCredentials no
+  ProxyJump none
+
+Host iam-ubuntu iam-ubuntu.slac.stanford.edu
+  Hostname iam-ubuntu.slac.stanford.edu
+  User swl
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  ProxyJump jump.slac.stanford.edu
+  ControlMaster auto
+  ControlPath "%d/.ssh/sockets/%n"
+
+Host iam*.slac.stanford.edu
+  User iamoper
+  IdentityFile ~/.ssh/id_ed25519
+  ProxyJump jump.slac.stanford.edu
+  ControlMaster auto
+  ControlPath "%d/.ssh/sockets/%n"
+
 Host *.stanford.edu
   User swl
   GSSAPIAuthentication yes
