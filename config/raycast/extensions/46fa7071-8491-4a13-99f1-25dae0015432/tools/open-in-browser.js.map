@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/tools/open-in-browser.ts"],
+  "sourcesContent": ["import { open } from \"@raycast/api\";\n\nexport type Input = {\n  url: string;\n};\n\nexport default async function ({ url }: Input) {\n  if (!url || url.length === 0) {\n    throw new Error(\"url is required\");\n  }\n  await open(url);\n  return { ok: true, url };\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAqB,wBAMrB,eAAOF,EAAwB,CAAE,IAAAG,CAAI,EAAU,CAC7C,GAAI,CAACA,GAAOA,EAAI,SAAW,EACzB,MAAM,IAAI,MAAM,iBAAiB,EAEnC,eAAM,QAAKA,CAAG,EACP,CAAE,GAAI,GAAM,IAAAA,CAAI,CACzB",
+  "names": ["open_in_browser_exports", "__export", "open_in_browser_default", "__toCommonJS", "import_api", "url"]
+}

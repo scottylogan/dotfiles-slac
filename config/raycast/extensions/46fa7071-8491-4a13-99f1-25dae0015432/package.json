@@ -393,6 +393,10 @@
   "categories": [
     "Developer Tools"
   ],
+  "platforms": [
+    "macOS",
+    "Windows"
+  ],
   "contributors": [
     "Loskir",
     "immint023",
@@ -408,12 +412,14 @@
     "jessedobbelaere",
     "heavyrisem",
     "constantins2001",
-    "tane_van_wifferen"
+    "pernielsentikaer",
+    "tane_van_wifferen",
+    "1weiho"
   ],
   "dependencies": {
     "@apollo/client": "^3.4.8",
-    "@raycast/api": "^1.60.0",
-    "@raycast/utils": "^1.0.6",
+    "@raycast/api": "^1.101.0",
+    "@raycast/utils": "^1.17.0",
     "apollo-link-context": "^1.0.20",
     "cross-fetch": "^4.0.0",
     "fuse.js": "^6.4.6",
@@ -425,23 +431,791 @@
     "use-interval": "^1.4.0"
   },
   "devDependencies": {
-    "@raycast/eslint-config": "^1.0.5",
-    "@types/node": "^18.8.4",
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "22.13.10",
     "@types/node-emoji": "^1.8.1",
     "@types/node-fetch": "^2.5.12",
     "@types/open": "^6.2.1",
-    "@types/react": "^18.2.27",
+    "@types/react": "19.0.10",
     "@types/url-join": "^4.0.1",
-    "eslint": "^7.31.0",
-    "prettier": "^2.5.1",
-    "react": "^18.2.0",
-    "typescript": "^4.3.5"
+    "eslint": "^9.22.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
   },
   "scripts": {
     "dev": "ray develop",
     "build": "ray build -e dist",
     "lint": "ray lint",
     "fix-lint": "ray lint --fix",
-    "fix-prettier": "prettier --write src"
+    "fix-prettier": "prettier --write src",
+    "evals": "ray evals",
+    "publish": "npx @raycast/api@latest publish"
+  },
+  "tools": [
+    {
+      "name": "search-projects",
+      "title": "Search Projects",
+      "description": "Search gitlab projects",
+      "input": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search keyword applied to project name/title."
+          },
+          "membership": {
+            "type": "string",
+            "description": "Whether to limit to member projects. String 'true' or 'false' (as per API)."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "confirmation": false
+    },
+    {
+      "name": "search-issues",
+      "title": "Search Issues",
+      "description": "Search gitlab issues",
+      "input": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "string",
+            "description": "Search string for issue title/description"
+          },
+          "projectId": {
+            "type": "number",
+            "description": "Target project ID; if omitted, search across all accessible issues"
+          },
+          "state": {
+            "type": "string",
+            "description": "opened | closed | all",
+            "enum": [
+              "opened",
+              "closed",
+              "all"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "description": "Show only relevant to me (assigned_to_me, created_by_me, all)",
+            "enum": [
+              "all",
+              "assigned_to_me",
+              "created_by_me"
+            ]
+          },
+          "includeLabels": {
+            "type": "string",
+            "description": "Comma-separated labels to include"
+          },
+          "excludeLabels": {
+            "type": "string",
+            "description": "Comma-separated labels to exclude"
+          }
+        },
+        "required": []
+      },
+      "confirmation": false
+    },
+    {
+      "name": "search-merge-requests",
+      "title": "Search Merge Requests",
+      "description": "Search gitlab merge requests",
+      "input": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "string",
+            "description": "Search string for MR title/description"
+          },
+          "projectId": {
+            "type": "number",
+            "description": "Target project ID; if omitted, search across all accessible MRs"
+          },
+          "state": {
+            "type": "string",
+            "description": "opened | closed | merged | all",
+            "enum": [
+              "opened",
+              "closed",
+              "merged",
+              "all"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "description": "all | assigned_to_me | created_by_me | reviewed_by_me",
+            "enum": [
+              "all",
+              "assigned_to_me",
+              "created_by_me",
+              "reviewed_by_me"
+            ]
+          },
+          "labels": {
+            "type": "string",
+            "description": "Comma-separated labels to include"
+          }
+        },
+        "required": []
+      },
+      "confirmation": false
+    },
+    {
+      "name": "get-todos",
+      "title": "Get Todos",
+      "description": "Get my gitlab todos",
+      "input": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "string",
+            "description": "Optional filter by action or target type, e.g., action_name=pending"
+          }
+        },
+        "required": []
+      },
+      "confirmation": false
+    },
+    {
+      "name": "close-issue",
+      "title": "Close Issue",
+      "description": "Close an issue by project and iid",
+      "input": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "number"
+          },
+          "issueIid": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "projectId",
+          "issueIid"
+        ]
+      },
+      "confirmation": true
+    },
+    {
+      "name": "reopen-issue",
+      "title": "Reopen Issue",
+      "description": "Reopen an issue by project and iid",
+      "input": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "number"
+          },
+          "issueIid": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "projectId",
+          "issueIid"
+        ]
+      },
+      "confirmation": true
+    },
+    {
+      "name": "close-merge-request",
+      "title": "Close Merge Request",
+      "description": "Close a merge request by project and iid",
+      "input": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "number"
+          },
+          "mergeRequestIid": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "projectId",
+          "mergeRequestIid"
+        ]
+      },
+      "confirmation": true
+    },
+    {
+      "name": "reopen-merge-request",
+      "title": "Reopen Merge Request",
+      "description": "Reopen a merge request by project and iid",
+      "input": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "number"
+          },
+          "mergeRequestIid": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "projectId",
+          "mergeRequestIid"
+        ]
+      },
+      "confirmation": true
+    },
+    {
+      "name": "merge-merge-request",
+      "title": "Merge Merge Request",
+      "description": "Merge a merge request with options",
+      "input": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "number"
+          },
+          "mergeRequestIid": {
+            "type": "number"
+          },
+          "squash": {
+            "type": "boolean",
+            "description": "Merge strategy: optional squash"
+          },
+          "shouldRemoveSourceBranch": {
+            "type": "boolean",
+            "description": "Delete source branch after merge"
+          }
+        },
+        "required": [
+          "projectId",
+          "mergeRequestIid"
+        ]
+      },
+      "confirmation": true
+    },
+    {
+      "name": "get-activities",
+      "title": "Get Activities",
+      "description": "Get recent gitlab activities",
+      "instructions": "Get recent activities",
+      "input": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "description": "`my` (default, only mine) or `all` (all activities in my projects)",
+            "enum": [
+              "my",
+              "all"
+            ]
+          },
+          "search": {
+            "type": "string",
+            "description": "client-side filtering (backend API currently doesn't support search for events)"
+          }
+        },
+        "required": []
+      },
+      "confirmation": false
+    },
+    {
+      "name": "get-recent-commits",
+      "title": "Get Recent Commits",
+      "description": "Get my recent commits",
+      "instructions": "Get user's recent commits",
+      "input": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "number",
+            "description": "If provided, filters events by the specific project"
+          },
+          "search": {
+            "type": "string",
+            "description": "Client-side filter by commit title or ref"
+          }
+        },
+        "required": []
+      },
+      "confirmation": false
+    },
+    {
+      "name": "open-in-browser",
+      "title": "Open in Browser",
+      "description": "Open a URL in Browser",
+      "input": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "confirmation": false
+    }
+  ],
+  "ai": {
+    "instructions": "- Please format Issues and Merge Requests as markdown links, e.g., [title](https://gitlab.com/:namespace/:project/-/issues/:iid) and [title](https://gitlab.com/:namespace/:project/-/merge_requests/:iid)\n- If the user provides a project that is not a full path (:namespace/:project), first use the search-projects tool to find the corresponding project. Before taking any action on an Issue, use search-issues to get the correct issue iid and projectId; before taking any action on an MR, use search-merge-requests to get the correct MR iid and projectId.",
+    "evals": [
+      {
+        "input": "@gitlab What are my todos?",
+        "mocks": {
+          "get-todos": []
+        },
+        "expected": [
+          {
+            "callsTool": "get-todos"
+          }
+        ]
+      },
+      {
+        "input": "@gitlab What are the recent commits in the extensions project?",
+        "mocks": {
+          "get-recent-commits": [],
+          "search-projects": [
+            {
+              "name": "extensions",
+              "id": 1561
+            }
+          ]
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "arguments": {
+                "query": "extensions"
+              },
+              "name": "search-projects"
+            }
+          },
+          {
+            "callsTool": {
+              "arguments": {
+                "projectId": 1561
+              },
+              "name": "get-recent-commits"
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Show my recent activities",
+        "mocks": {
+          "get-activities": []
+        },
+        "expected": [
+          {
+            "callsTool": "get-activities"
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Show all activities across my projects",
+        "mocks": {
+          "get-activities": []
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "get-activities",
+              "arguments": {
+                "scope": "all"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Open https://gitlab.com/group/project",
+        "mocks": {
+          "open-in-browser": [
+            {
+              "ok": true,
+              "url": "https://gitlab.com/group/project"
+            }
+          ]
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "open-in-browser",
+              "arguments": {
+                "url": "https://gitlab.com/group/project"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Find projects named ai",
+        "mocks": {
+          "search-projects": []
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-projects",
+              "arguments": {
+                "query": "ai"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Search issues about login bug in the extensions project",
+        "mocks": {
+          "search-projects": [
+            {
+              "name": "extensions",
+              "id": 1561
+            }
+          ],
+          "search-issues": []
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-projects",
+              "arguments": {
+                "query": "extensions"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "search-issues",
+              "arguments": {
+                "projectId": 1561,
+                "search": "login bug"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Search merge requests about refactor auth in the extensions project",
+        "mocks": {
+          "search-projects": [
+            {
+              "name": "extensions",
+              "id": 1561
+            }
+          ],
+          "search-merge-requests": []
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-projects",
+              "arguments": {
+                "query": "extensions"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "search-merge-requests",
+              "arguments": {
+                "projectId": 1561,
+                "search": "refactor auth"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Close the issue 'Fix pipeline' in the extensions project",
+        "mocks": {
+          "search-projects": [
+            {
+              "name": "extensions",
+              "id": 1561
+            }
+          ],
+          "search-issues": [
+            {
+              "iid": 7,
+              "project_id": 1561,
+              "title": "Fix pipeline"
+            }
+          ],
+          "close-issue": [
+            {
+              "ok": true
+            }
+          ]
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-projects",
+              "arguments": {
+                "query": "extensions"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "search-issues",
+              "arguments": {
+                "projectId": 1561,
+                "search": "Fix pipeline"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "close-issue",
+              "arguments": {
+                "projectId": 1561,
+                "issueIid": 7
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Reopen the issue 'Fix pipeline' in the extensions project",
+        "mocks": {
+          "search-projects": [
+            {
+              "name": "extensions",
+              "id": 1561
+            }
+          ],
+          "search-issues": [
+            {
+              "iid": 7,
+              "project_id": 1561,
+              "title": "Fix pipeline"
+            }
+          ],
+          "reopen-issue": [
+            {
+              "ok": true
+            }
+          ]
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-projects",
+              "arguments": {
+                "query": "extensions"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "search-issues",
+              "arguments": {
+                "projectId": 1561,
+                "search": "Fix pipeline"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "reopen-issue",
+              "arguments": {
+                "projectId": 1561,
+                "issueIid": 7
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Close the merge request 'Cleanup CI' in the extensions project",
+        "mocks": {
+          "search-projects": [
+            {
+              "name": "extensions",
+              "id": 1561
+            }
+          ],
+          "search-merge-requests": [
+            {
+              "iid": 12,
+              "project_id": 1561,
+              "title": "Cleanup CI"
+            }
+          ],
+          "close-merge-request": [
+            {
+              "ok": true
+            }
+          ]
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-projects",
+              "arguments": {
+                "query": "extensions"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "search-merge-requests",
+              "arguments": {
+                "projectId": 1561,
+                "search": "Cleanup CI"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "close-merge-request",
+              "arguments": {
+                "projectId": 1561,
+                "mergeRequestIid": 12
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Reopen the merge request 'Cleanup CI' in the extensions project",
+        "mocks": {
+          "search-projects": [
+            {
+              "name": "extensions",
+              "id": 1561
+            }
+          ],
+          "search-merge-requests": [
+            {
+              "iid": 12,
+              "project_id": 1561,
+              "title": "Cleanup CI"
+            }
+          ],
+          "reopen-merge-request": [
+            {
+              "ok": true
+            }
+          ]
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-projects",
+              "arguments": {
+                "query": "extensions"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "search-merge-requests",
+              "arguments": {
+                "projectId": 1561,
+                "search": "Cleanup CI"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "reopen-merge-request",
+              "arguments": {
+                "projectId": 1561,
+                "mergeRequestIid": 12
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Merge the merge request 'Refactor API' in the extensions project with squash and remove source branch",
+        "mocks": {
+          "search-projects": [
+            {
+              "name": "extensions",
+              "id": 1561
+            }
+          ],
+          "search-merge-requests": [
+            {
+              "iid": 23,
+              "project_id": 1561,
+              "title": "Refactor API"
+            }
+          ],
+          "merge-merge-request": [
+            {
+              "ok": true
+            }
+          ]
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-projects",
+              "arguments": {
+                "query": "extensions"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "search-merge-requests",
+              "arguments": {
+                "projectId": 1561,
+                "search": "Refactor API"
+              }
+            }
+          },
+          {
+            "callsTool": {
+              "name": "merge-merge-request",
+              "arguments": {
+                "projectId": 1561,
+                "mergeRequestIid": 23,
+                "squash": true,
+                "shouldRemoveSourceBranch": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Find my recent commits mentioning fix",
+        "mocks": {
+          "get-recent-commits": []
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "get-recent-commits",
+              "arguments": {
+                "search": "fix"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@gitlab Show todos with pending",
+        "mocks": {
+          "get-todos": []
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "get-todos",
+              "arguments": {
+                "search": "pending"
+              }
+            }
+          }
+        ]
+      }
+    ]
   }
 }
