@@ -1,3 +1,9 @@
+#--- github ---
+
+Host github.com
+  IdentityFile ~/.ssh/github_rsa
+
+
 #--- pico.sh ---
 
 Host pico.sh, prose.sh
@@ -16,64 +22,73 @@ Host code.stanford.edu
 Host cardinal cardinal? corn corn??
   HostName %h.stanford.edu
 
-Host jump.slac.stanford.edu
-  User swl
-  GSSAPIAuthentication no
-  GSSAPIDelegateCredentials no
-  ProxyJump none
-
-Host iam-ubuntu iam-ubuntu.slac.stanford.edu
-  Hostname iam-ubuntu.slac.stanford.edu
+Host *.stanford.edu !*.slac.stanford.edu
   User swl
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
-  ProxyJump jump.slac.stanford.edu
-  ControlMaster auto
-  ControlPath "%d/.ssh/sockets/%n"
 
-Host iam*.slac.stanford.edu
+#--- SLAC ---
+
+Host iam-ubuntu
+  Hostname iam-ubuntu.slac.stanford.edu
+
+Match Host iam-ubuntu.slac.stanford.edu
+  User swl
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+#  ProxyJump none
+
+Host iam-*-*
+  Hostname %h.slac.stanford.edu
+
+Match Host iam-*-*.slac.stanford.edu
   User iamoper
   IdentityFile ~/.ssh/id_ed25519
-  ProxyJump jump.slac.stanford.edu
-  ControlMaster auto
-  ControlPath "%d/.ssh/sockets/%n"
 
-Host *.stanford.edu
+Host jump.slac.stanford.edu
   User swl
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
+  ProxyJump none
 
-#--- github ---
-
-Host github.com
-   IdentityFile ~/.ssh/github_rsa
-
+Match Host *.slac.stanford.edu
+  ProxyJump jump.slac.stanford.edu
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  ControlMaster auto
+  ControlPath "%d/.ssh/sockets/%n"
 
 #--- local / catbert ---
 
+Host animal
+  Hostname animal.local
+
 Host animal.local
-   User swl
+  User swl
+
+Host beaker
+  Hostname beaker.local
 
 Host beaker.local
   AddressFamily inet
 
 Host *.catbert.net *.local
-   User scotty
-   ForwardAgent yes
-   ForwardX11 no
-   SendEnv TERM XAUTHORITY
-   IdentityFile ~/.ssh/id_rsa
+  User scotty
+  ForwardAgent yes
+  ForwardX11 no
+  SendEnv TERM XAUTHORITY
+  IdentityFile ~/.ssh/id_rsa
 
 #--- defaults ---
 
 # send keepalive packets every 5 minutes
 # keep connections alive for 4 hours
 Host * !localhost
-   ForwardAgent yes
-   ForwardX11 no
-   ServerAliveInterval 300
-   ServerAliveCountMax 48
-   HashKnownHosts yes
+  ForwardAgent yes
+  ForwardX11 no
+  ServerAliveInterval 300
+  ServerAliveCountMax 48
+  HashKnownHosts yes
 
 Host default
   HostName 127.0.0.1
