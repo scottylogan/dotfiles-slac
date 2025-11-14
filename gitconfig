@@ -6,6 +6,7 @@
 [core]
 	editor = emacsclient
 	excludesfile = ~/.gitignore_global
+	pager = cat
 
 [push]
 	default = simple
@@ -29,7 +30,6 @@
 [tag]
 	sort = version:refname
 [pull]
-	rebase = false
 [init]
 	defaultBranch = main
 [github]
