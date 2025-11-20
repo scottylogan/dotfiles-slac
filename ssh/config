@@ -36,12 +36,15 @@ Host jump.slac.stanford.edu
   GSSAPIDelegateCredentials yes
   ProxyJump none
 
-Match Host *.slac.stanford.edu
+Host *.slac.stanford.edu
   ProxyJump jump.slac.stanford.edu
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
   ControlMaster auto
   ControlPath "%d/.ssh/sockets/%n"
+
+Match host *.slac.stanford.edu localnetwork 134.79.169.0/24
+  ProxyJump none
 
 #--- local / catbert ---
 
