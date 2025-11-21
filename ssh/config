@@ -21,7 +21,6 @@ Match Host iam-ubuntu.slac.stanford.edu
   User swl
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
-#  ProxyJump none
 
 Host iam-*-*
   Hostname %h.slac.stanford.edu
@@ -36,15 +35,15 @@ Host jump.slac.stanford.edu
   GSSAPIDelegateCredentials yes
   ProxyJump none
 
-Host *.slac.stanford.edu
+Match host *.slac.stanford.edu localnetwork 134.79.169.0/24
+  ProxyJump none
+
+Match Host *.slac.stanford.edu
   ProxyJump jump.slac.stanford.edu
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
   ControlMaster auto
   ControlPath "%d/.ssh/sockets/%n"
-
-Match host *.slac.stanford.edu localnetwork 134.79.169.0/24
-  ProxyJump none
 
 #--- local / catbert ---
 
@@ -86,14 +85,13 @@ Match Host cardinal1.stanford.edu
   ProxyCommand none
 
 # Host *.stanford.edu !*.slac.stanford.edu !cardinal1.stanford.edu !code.stanford.edu
-Match Host *.stanford.edu
+Match Host *.stanford.edu Host !*.slac.stanford.edu
   User swl
   ProxyJump swl@cardinal1.stanford.edu
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
   ControlMaster auto
   ControlPath "%d/.ssh/sockets/%n"
-
 
 #--- defaults ---
 
