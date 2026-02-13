@@ -6,7 +6,7 @@
 [core]
 	editor = emacsclient
 	excludesfile = ~/.gitignore_global
-	pager = cat
+	pager = bat
 
 [push]
 	default = simple
