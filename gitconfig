@@ -29,8 +29,16 @@
 
 [tag]
 	sort = version:refname
+
 [pull]
+
 [init]
 	defaultBranch = main
+
 [github]
 	user = scottylogan
+
+[delta]
+  side-by-side = true
+  line-numbers-left-format = ""
+  line-numbers-right-format = "│ "
