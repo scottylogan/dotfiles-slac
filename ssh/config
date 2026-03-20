@@ -53,6 +53,14 @@ Match Host *.slac.stanford.edu
   ControlMaster auto
   ControlPath "%d/.ssh/sockets/%n"
 
+
+#--- iinsic.com ---
+
+Host services.iinsic.com
+  User swl
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+
 #--- local / catbert ---
 
 Host animal
@@ -66,6 +74,9 @@ Host beaker
 
 Host beaker.local
   AddressFamily inet
+
+Host sweetums.local
+  User swl
 
 Host *.catbert.net *.local
   User scotty
