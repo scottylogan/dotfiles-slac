@@ -26,12 +26,17 @@ fi
 # (Re-)Link files
 
 for file in *; do
-  # skip config directory
-  [ "${file}" == "config" ] && continue
-  [ "${file}" == "$(basename "${0}")" ] && continue
-  target="${HOME}/.${file}"
-  echo Linking ".${file}"
-  ${link} "${relative}/${file}" "${target}"
+  case "${file}" in
+    config|"$(basename "${0}")"|LICENSE|*.md)
+      # skip config, LICENSE, Markdown files, and this script directory
+      continue
+      ;;
+    *)
+      target="${HOME}/.${file}"
+      echo Linking ".${file}"
+      ${link} "${relative}/${file}" "${target}"
+      ;;
+   esac
 done
 
 # handle config directory, which is shared between this repo and others
