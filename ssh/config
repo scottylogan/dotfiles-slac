@@ -38,6 +38,14 @@ Host jump.slac.stanford.edu
 Match host *.slac.stanford.edu localnetwork 134.79.169.0/24
   ProxyJump none
 
+Host cdlogin.slac.stanford.edu
+  User swl
+  ProxyJump none
+
+Match Host rhel6-64*.slac.stanford.edu
+  HostKeyAlgorithms +ssh-rsa
+  PubkeyAcceptedAlgorithms +ssh-rsa
+
 Match Host *.slac.stanford.edu
   ProxyJump jump.slac.stanford.edu
   GSSAPIAuthentication yes
