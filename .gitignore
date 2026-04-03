@@ -7,3 +7,4 @@ config/gcloud
 docker/buildx
 docker/config.json
 ssh/known_hosts.old
+config/dlv/.dbg_history
