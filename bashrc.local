@@ -46,6 +46,14 @@ if [[ $- == *i* ]]; then
     ssh "bastion.${domain}.stanford.edu"
   }
 
+  function claude-slac {
+    if ping -t 2 -q -c 1 -n ai-api.slac.stanford.edu >/dev/null 2>&1; then
+      echo Must be on SLAC VPN
+    else
+      claude --settings ~/.claude/settings-slac.json
+    fi
+  }
+
   ### SSH AGENT ###
 
   # ssh-add -l returns:
