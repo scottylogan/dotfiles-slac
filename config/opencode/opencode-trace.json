@@ -1,0 +1,40 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "lsp": false,
+  "plugin": [
+    "@ljw1004/opencode-trace"
+  ],
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.secret": "deny"
+    },
+    "list": {
+      "*": "allow"
+    },
+    "edit": {
+      "*": "ask"
+    }
+  },
+  "provider": {
+    "litellm": {
+      "name": "Claude (SLAC)",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://ai-api.slac.stanford.edu/v1"
+      },
+      "models": {
+        "us.anthropic.claude-sonnet-4-6": {
+          "name": "Claude Sonnet 4.6"
+        },
+        "us.anthropic.claude-opus-4-6-v1": {
+          "name": "Claude Opus 4.6"
+        },
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+          "name": "Claude Haiku 4.5"
+        }
+      }
+    }
+  }
+}
