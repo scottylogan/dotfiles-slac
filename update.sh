@@ -1,12 +1,76 @@
 #! /bin/bash
 
-cd "$(dirname "${0}")" || exit
+prog=$(basename "${0}")
+progdir=$(dirname "${0}")
 
-here=$(pwd -P)
-relative=${here/$HOME\//}
+cd "${progdir}" || exit
 
-link="/bin/ln -sfh"
-[[ -f /etc/os-release ]] && link="ln -sfn"
+DEBUG=0
+RELATIVEPATHS=0
+last=
+
+function usage {
+  echo "Usage: ${prog} [-d] [-d n]" >&2
+  exit 1
+}
+
+for opt in "${@}"; do
+  case "${opt}" in
+    "-r")
+      RELATIVEPATHS=1
+      ;;
+    "-d")
+      DEBUG=$((DEBUG + 1))
+      ;;
+    1|2)
+      if [ "${last}" == "-d" ]; then
+        DEBUG="${opt}"
+      else
+        usage
+      fi
+      ;;
+    *)
+      usage
+      ;;
+  esac
+  last="${opt}"
+done
+
+function debug {
+  level=$1
+  shift
+  [ "${DEBUG}" -ge "${level}" ] && echo "${@}"
+}
+
+function debug1 {
+  debug 1 "${@}"
+}
+
+function debug2 {
+  debug 2 "${@}"
+}
+
+HERE=$(pwd -P)
+RELATIVE=${HERE/$HOME\//}
+
+LINK="/bin/ln -sfh"
+[[ -f /etc/os-release ]] && LINK="ln -sfn"
+
+export HERE LINK RELATIVE
+
+# Usage link target src
+function link {
+  target=$1
+  src=${2/$HOME\//}
+  [ "${RELATIVEPATHS}" == 0 ] && src="${HOME}/${src}"
+  stat=$(/usr/bin/stat -f %Y "${target}" 2>/dev/null)
+  if [ -e "${target}" ] && [ "${stat}" == "${src}" ]; then
+    debug2 "Skipping ${target} - already linked to ${src}"
+    return
+  fi
+  debug1 Linking "${src} to ${target}"
+  ${LINK} "${src}" "${target}"
+}
 
 # Initialize / update any git submodules
 
@@ -27,16 +91,14 @@ fi
 
 for file in *; do
   case "${file}" in
-    config|"$(basename "${0}")"|LICENSE|*.md)
-      # skip config, LICENSE, Markdown files, and this script directory
+    config|config-overlay|LICENSE|*.sh|*.md)
+      # skip config, config-overlay, LICENSE, Markdown files, and any scripts
       continue
       ;;
     *)
-      target="${HOME}/.${file}"
-      echo Linking ".${file}"
-      ${link} "${relative}/${file}" "${target}"
+      link "${HOME}/.${file}" "${RELATIVE}/${file}"
       ;;
-   esac
+  esac
 done
 
 # handle config directory, which is shared between this repo and others
@@ -46,29 +108,16 @@ if [ -d config ]; then
 
   for thing in config/*; do
     target="${HOME}/.config/$(basename "${thing}")"
-    echo Linking ".${thing}"
-    ${link} "${HOME}/${relative}/${thing}" "${target}"
+    link "${target}" "${HOME}/${RELATIVE}/${thing}"
   done
 fi
 
-# Fix permissions
+# Run helper scripts
 
-## Make a bunch of files readable only by user
-
-chmod -R 0400 "${here}/npmrc"
-
-find "${here}/aws" "${here}/docker" "${here}/ssh" -type f -print0 | xargs -0 chmod 0400 
-
-chmod 0700 "${here}/aws" "${here}/docker" "${here}/ssh"
-
-## Loosen up some SSH file permissions - config, pub keys
-
-chmod 0444 "${here}/ssh/config"
-chmod 0444 "${here}/ssh/authorized_keys"
-chmod 0444 "${here}/ssh/"*.pub
-
-## Allow writes to ssh known_hosts and sockets
-
-chmod 0644 "${here}/ssh/known_hosts"
-chmod 0700 "${here}/ssh/sockets"
-
+if [ -d ./helpers ]; then
+  for helper in helpers/*.sh; do
+    echo Running "${helper}"
+    #shellcheck source=/dev/null
+    . "${helper}"
+  done
+fi
