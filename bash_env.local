@@ -1,3 +1,4 @@
 # -*-sh-*-
+# shellcheck shell=bash
 export GITLAB_HOST=https://code.stanford.edu
 export KRB5_CONFIG=$HOME/.krb5.conf

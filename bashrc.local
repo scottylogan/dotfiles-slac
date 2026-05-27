@@ -1,4 +1,5 @@
 # -*- sh -*-
+# shellcheck shell=bash
 # .bashrc
 # .bashrc.local (Stanford)
 
