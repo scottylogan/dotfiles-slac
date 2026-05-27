@@ -1,7 +1,7 @@
 # -*- sh -*-
 # shellcheck shell=bash
 # .bashrc
-# .bashrc.local (Stanford)
+# .bashrc.local (SLAC)
 
 if [[ $- == *i* ]]; then
 
