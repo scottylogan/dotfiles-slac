@@ -1,7 +1,7 @@
 git_protocol: ssh
 glamour_style: dark
 check_update: true
-last_update_check_timestamp: 2026-05-17T22:22:52-07:00
+last_update_check_timestamp: 2026-06-23T11:40:32-07:00
 display_hyperlinks: false
 host: code.stanford.edu
 no_prompt: false
@@ -9,3 +9,9 @@ telemetry: true
 hosts:
     code.stanford.edu:
         git_protocol: ssh
+        container_registry_domains: code.stanford.edu,code.stanford.edu:443,registry.code.stanford.edu
+        api_host: code.stanford.edu
+        api_protocol: https
+        user: swl
+last_seen_version: v1.103.0
+use_keyring: "true"
