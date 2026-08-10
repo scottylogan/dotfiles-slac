@@ -27,6 +27,7 @@ Host iam-*-*
 
 Match Host iam-*-*.slac.stanford.edu
   User iamoper
+  ProxyJump jump.slac.stanford.edu
   IdentityFile ~/.ssh/id_ed25519
 
 Host jump.slac.stanford.edu
