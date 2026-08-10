@@ -1,7 +1,7 @@
 git_protocol: ssh
 glamour_style: dark
 check_update: true
-last_update_check_timestamp: 2026-07-07T12:54:07-07:00
+last_update_check_timestamp: 2026-07-30T12:25:20-07:00
 display_hyperlinks: false
 host: code.stanford.edu
 no_prompt: false
@@ -13,5 +13,5 @@ hosts:
         api_host: code.stanford.edu
         api_protocol: https
         user: swl
-last_seen_version: v1.106.0
+last_seen_version: v1.109.0
 use_keyring: "true"
